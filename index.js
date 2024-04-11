@@ -1,168 +1,218 @@
-//import Phaser from 'phaser';
+const dict={1:"!",2:"'",3:"#",4:"$",5:"%",6:"&",7:"'",8:"(",9:")",10:"*",11:"+",12:",",13:"-",14:".",15:"/",16:"0",17:"1",18:"2",19:"3",20:"4",21:"5",22:"6",23:"7",24:"8",25:"9",26:":",27:";",28:"<",29:"=",30:">",31:"?",32:"@",33:"A",34:"B",35:"C",36:"D",37:"E",38:"F",39:"G",40:"H",41:"I",42:"J",43:"K",44:"L",45:"M",46:"N",47:"O",48:"P",49:"Q",50:"R",51:"S",52:"T",53:"U",54:"V",55:"W",56:"X",57:"Y",58:"Z",59:"[",60:"]",61:"^",62:"_",63:"`",64:"a",65:"b",66:"c",67:"d",68:"e",69:"f",70:"g",71:"h",72:"i",73:"j",74:"k",75:"l",76:"m",77:"n",78:"o",79:"p",80:"q",81:"r",82:"s",83:"t",84:"u",85:"v",86:"w",87:"x",88:"y",89:"z",90:"{",91:"|!",92:"|'",93:"|#",94:"|$",95:"|%",96:"|&",97:"|'",98:"|(",99:"|)",100:"|*",101:"|+",102:"|,",103:"|-",104:"|.",105:"|/",106:"|0",107:"|1",108:"|2",109:"|3",110:"|4",111:"|5",112:"|6",113:"|7",114:"|8",115:"|9",116:"|:",117:"|;",118:"|<",119:"|=",120:"|>",121:"|?",122:"|@",123:"|A",124:"|B",125:"|C",126:"|D",127:"|E",128:"|F",129:"|G",130:"|H",131:"|I",132:"|J",133:"|K",134:"|L",135:"|M",136:"|N",137:"|O",138:"|P",139:"|Q",140:"|R",141:"|S",142:"|T",143:"|U",144:"|V",145:"|W",146:"|X",147:"|Y",148:"|Z",149:"|[",150:"|]",151:"|^",152:"|_",153:"|`",154:"|a",155:"|b",156:"|c",157:"|d",158:"|e",159:"|f",160:"|g",161:"|h",162:"|i",163:"|j",164:"|k",165:"|l",166:"|m",167:"|n",168:"|o",169:"|p",170:"|q",171:"|r",172:"|s",173:"|t",174:"|u",175:"|v",176:"|w",177:"|x",178:"|y",179:"|z",180:"|{",181:"}!",182:"}'",183:"}#",184:"}$",185:"}%",186:"}&",187:"}'",188:"}(",189:"})",190:"}*",191:"}+",192:"},",193:"}-",194:"}.",195:"}/",196:"}0",197:"}1",198:"}2",199:"}3",200:"}4",201:"}5",202:"}6",203:"}7",204:"}8",205:"}9",206:"}:",207:"};",208:"}<",209:"}=",210:"}>",211:"}?",212:"}@",213:"}A",214:"}B",215:"}C",216:"}D",217:"}E",218:"}F",219:"}G",220:"}H",221:"}I",222:"}J",223:"}K",224:"}L",225:"}M",226:"}N",227:"}O",228:"}P",229:"}Q",230:"}R",231:"}S",232:"}T",233:"}U",234:"}V",235:"}W",236:"}X",237:"}Y",238:"}Z",239:"}[",240:"}]",241:"}^",242:"}_",243:"}`",244:"}a",245:"}b",246:"}c",247:"}d",248:"}e",249:"}f",250:"}g",251:"}h",252:"}i",253:"}j",254:"}k",255:"}l",256:"}m",257:"}n",258:"}o",259:"}p",260:"}q",261:"}r",262:"}s",263:"}t",264:"}u",265:"}v",266:"}w",267:"}x",268:"}y",269:"}z",270:"}{",271:"~!",272:"~'",273:"~#",274:"~$",275:"~%",276:"~&",277:"~'",278:"~(",279:"~)",280:"~*",281:"~+",282:"~,",283:"~-",284:"~.",285:"~/",286:"~0",287:"~1",288:"~2",289:"~3",290:"~4",291:"~5",292:"~6",293:"~7",294:"~8",295:"~9",296:"~:",297:"~;",298:"~<",299:"~=",300:"~>"};
+const antidict={"0":16,"1":17,"2":18,"3":19,"4":20,"5":21,"6":22,"7":23,"8":24,"9":25,"!":1,"'":7,"#":3,"$":4,"%":5,"&":6,"(":8,")":9,"*":10,"+":11,",":12,"-":13,".":14,"/":15,":":26,";":27,"<":28,"=":29,">":30,"?":31,"@":32,"A":33,"B":"34","C":35,"D":36,"E":37,"F":38,"G":39,"H":40,"I":41,"J":42,"K":43,"L":44,"M":45,"N":46,"O":47,"P":48,"Q":49,"R":50,"S":51,"T":52,"U":53,"V":54,"W":55,"X":56,"Y":57,"Z":58,"[":59,"]":60,"^":61,"_":62,"`":63,"a":64,"b":65,"c":66,"d":67,"e":68,"f":69,"g":70,"h":71,"i":72,"j":73,"k":74,"l":75,"m":76,"n":77,"o":78,"p":79,"q":80,"r":81,"s":82,"t":83,"u":84,"v":85,"w":86,"x":87,"y":88,"z":89,"{":90,"|!":91,"|'":97,"|#":93,"|$":94,"|%":95,"|&":96,"|(":98,"|)":99,"|*":100,"|+":101,"|,":102,"|-":103,"|.":104,"|/":105,"|0":106,"|1":107,"|2":108,"|3":109,"|4":110,"|5":111,"|6":112,"|7":113,"|8":114,"|9":115,"|:":116,"|;":117,"|<":118,"|=":119,"|>":120,"|?":121,"|@":122,"|A":123,"|B":124,"|C":125,"|D":126,"|E":127,"|F":128,"|G":129,"|H":130,"|I":131,"|J":132,"|K":133,"|L":134,"|M":135,"|N":136,"|O":137,"|P":138,"|Q":139,"|R":140,"|S":141,"|T":142,"|U":143,"|V":144,"|W":145,"|X":146,"|Y":147,"|Z":148,"|[":149,"|]":150,"|^":151,"|_":152,"|`":153,"|a":154,"|b":155,"|c":156,"|d":157,"|e":158,"|f":159,"|g":160,"|h":161,"|i":162,"|j":163,"|k":164,"|l":165,"|m":166,"|n":167,"|o":168,"|p":169,"|q":170,"|r":171,"|s":172,"|t":173,"|u":174,"|v":175,"|w":176,"|x":177,"|y":178,"|z":179,"|{":180,"}!":181,"}'":187,"}#":183,"}$":184,"}%":185,"}&":186,"}(":188,"})":189,"}*":190,"}+":191,"},":192,"}-":193,"}.":194,"}/":195,"}0":196,"}1":197,"}2":198,"}3":199,"}4":200,"}5":201,"}6":202,"}7":203,"}8":204,"}9":205,"}:":206,"};":207,"}<":208,"}=":209,"}>":210,"}?":211,"}@":212,"}A":213,"}B":214,"}C":215,"}D":216,"}E":217,"}F":218,"}G":219,"}H":220,"}I":221,"}J":222,"}K":223,"}L":224,"}M":225,"}N":226,"}O":227,"}P":228,"}Q":229,"}R":230,"}S":231,"}T":232,"}U":233,"}V":234,"}W":235,"}X":236,"}Y":237,"}Z":238,"}[":239,"}]":240,"}^":241,"}_":242,"}`":243,"}a":244,"}b":245,"}c":246,"}d":247,"}e":248,"}f":249,"}g":250,"}h":251,"}i":252,"}j":253,"}k":254,"}l":255,"}m":256,"}n":257,"}o":258,"}p":259,"}q":260,"}r":261,"}s":262,"}t":263,"}u":264,"}v":265,"}w":266,"}x":267,"}y":268,"}z":269,"}{":270,"~!":271,"~'":277,"~#":273,"~$":274,"~%":275,"~&":276,"~(":278,"~)":279,"~*":280,"~+":281,"~,":282,"~-":283,"~.":284,"~/":285,"~0":286,"~1":287,"~2":288,"~3":289,"~4":290,"~5":291,"~6":292,"~7":293,"~8":294,"~9":295,"~:":296,"~;":297,"~<":298,"~=":299,"~>":300};
 
-import Boot from './assets/classes/Boot.js'
-import Preloader from './assets/classes/Preloader.js'
-import CloudBack from './assets/classes/CloudBack.js'
-import Menu from './assets/classes/Menu.js'
-import Level from './assets/classes/Level.js'
-import CloudFront from './assets/classes/CloudFront.js'
-
-var isIOS = /iP[ao]d|iPhone/i.test(navigator.userAgent);
-
-//type : Phaser.AUTO,
-//renderer : isIOS ? Phaser.CANVAS : Phaser.AUTO,
-
-let config = {
-    type : Phaser.WEBGL,
-    renderer : Phaser.WEBGL,
-    antialias: true,
-    mipmapFilter: "LINEAR_MIPMAP_LINEAR",
-    //pixelArt:true,
-    //roundPixels: true,
-    width : 1920*3,
-    height : 1080,
-    scale : {
-        mode : Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
-        //mode : Phaser.Scale.FIT,
-        autoCenter : Phaser.Scale.CENTER_BOTH,
-    },
-    /*
-    physics: {
-        default: 'matter',
-        matter: {
-            //debug: true,
-            gravity: {
-                y: 3,
-            },
-        }
-    },
-    */
-    //backgroundColor: 0x385BFF,//ffffff,
-    backgroundColor:0x092db0,
-    //backgroundColor:0xf0af7a,
-    //backgroundColor:0x617ec2,
-    scene : [
-        Boot,
-        Preloader,
-        CloudBack,
-        Menu,
-        Level,
-        CloudFront,
-        ],
-}
-
-let storageData = localStorage.getItem('balance');
-    
-if(storageData) storageData = JSON.parse(storageData);
-else storageData = {};
-
-const Game = new Phaser.Game(config);
-Game.data = storageData;
-
-Game.saveUserData = function(){
-    localStorage.setItem(
-        'balance',
-        JSON.stringify(Game.data),
-        );
-    };
-    
-Game.currentWidth=-1;
-Game.currentHeight=-1;
-
-//Game.data={};
-//Game.saveUserData();
-
-if(!('isAudioOn' in Game.data))
+function serialize(numbers)
 {
-    Game.data.isAudioOn=true;
+  let serializedString="";
+  //массив из чисел, записанных в строке numbers(через пробел)
+  let arrayOfNumbers = numbers.split(` `).map(x => parseInt(x, 10));
+  for(let i of arrayOfNumbers)
+  {
+    if(i)
+    {
+      serializedString+=dict[i];
+    }
+  }
+
+  return serializedString;
 }
 
-if(!('isMusicOn' in Game.data))
+function deserialize(serial)
 {
-    Game.data.isMusicOn=true;
+  let deserializedString="";
+  
+  //счетчик номера символов, по которым мы проходимся
+  let counter=0;
+
+  while(counter<serial.length)
+  {
+    //текущий символ, который мы рассматриваем
+    let currentSymbol="";
+
+    if(serial[counter]==="|")
+    {
+      currentSymbol=serial[counter]+serial[counter+1];
+      counter+=2;
+    }
+    else if(serial[counter]==="}")
+    {
+      currentSymbol=serial[counter]+serial[counter+1];
+      counter+=2;
+    }
+    else if(serial[counter]==="~")
+    {
+      currentSymbol=serial[counter]+serial[counter+1];
+      counter+=2;
+    }
+    else
+    {
+      currentSymbol=serial[counter];
+      counter+=1;
+    }
+    deserializedString+=antidict[currentSymbol].toString()+" ";
+  }
+
+  return deserializedString;
 }
 
-if(!('openedFlowers' in Game.data))
+let TEST="";
+
+//прогоним тесты
+//50 случайных чисел
+
+let array50="";
+
+for(let i=0;i<50;i++)
 {
-    Game.data.openedFlowers=0;
+  array50+=Math.floor(301*Math.random()).toString()+" ";
 }
+
+TEST+="50 случайных чисел";
+TEST+="\n";
+TEST+="input:\n"+array50;
+TEST+="\n";
+TEST+="output:\n"+serialize(array50);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(array50.length-serialize(array50).length)/array50.length)+"%";
+TEST+="\n\n\n";
+
+//100 случайных чисел
+
+let array100="";
+
+for(let i=0;i<100;i++)
+{
+  array100+=Math.floor(301*Math.random()).toString()+" ";
+}
+
+TEST+="100 случайных чисел";
+TEST+="\n";
+TEST+="input:\n"+array100;
+TEST+="\n";
+TEST+="output:\n"+serialize(array100);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(array100.length-serialize(array100).length)/array100.length)+"%";
+TEST+="\n\n\n";
+
+//500 случайных чисел
+
+let array500="";
+
+for(let i=0;i<500;i++)
+{
+  array500+=Math.floor(301*Math.random()).toString()+" ";
+}
+
+TEST+="500 случайных чисел";
+TEST+="\n";
+TEST+="input:\n"+array500;
+TEST+="\n";
+TEST+="output:\n"+serialize(array500);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(array500.length-serialize(array500).length)/array500.length)+"%";
+TEST+="\n\n\n";
+
+//1000 случайных чисел
+
+let array1000="";
+
+for(let i=0;i<1000;i++)
+{
+  array1000+=Math.floor(301*Math.random()).toString()+" ";
+}
+
+TEST+="1000 случайных чисел";
+TEST+="\n";
+TEST+="input:\n"+array1000;
+TEST+="\n";
+TEST+="output:\n"+serialize(array1000);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(array1000.length-serialize(array1000).length)/array1000.length)+"%";
+TEST+="\n\n\n";
+
+//300 однозначных чисел
+
+let arraychar1="";
+
+for(let i=0;i<300;i++)
+{
+  arraychar1+=Math.floor(10*Math.random()).toString()+" ";
+}
+
+TEST+="300 однозначных чисел";
+TEST+="\n";
+TEST+="input:\n"+arraychar1;
+TEST+="\n";
+TEST+="output:\n"+serialize(arraychar1);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(arraychar1.length-serialize(arraychar1).length)/arraychar1.length)+"%";
+TEST+="\n\n\n";
+
+//300 двузначных чисел
+
+let arraychar2="";
+
+for(let i=0;i<300;i++)
+{
+  arraychar2+=Math.floor(10+90*Math.random()).toString()+" ";
+}
+
+TEST+="300 двузначных чисел";
+TEST+="\n";
+TEST+="input:\n"+arraychar2;
+TEST+="\n";
+TEST+="output:\n"+serialize(arraychar2);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(arraychar2.length-serialize(arraychar2).length)/arraychar2.length)+"%";
+TEST+="\n\n\n";
+
+//300 трехначных чисел
+
+let arraychar3="";
+
+for(let i=0;i<300;i++)
+{
+  arraychar3+=Math.floor(100+201*Math.random()).toString()+" ";
+}
+
+TEST+="300 трехзначных чисел";
+TEST+="\n";
+TEST+="input:\n"+arraychar3;
+TEST+="\n";
+TEST+="output:\n"+serialize(arraychar3);
+TEST+="\n";
+TEST+="compression:\n"+Math.floor(100*(arraychar3.length-serialize(arraychar3).length)/arraychar3.length)+"%";
+TEST+="\n\n\n";
+
+console.log(TEST)
 
 /*
-if(!('isFullscreen' in Game.data))
+let ASCII=" !'#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+let dicta={};
+let antiDicta={};
+
+for(let i=1;i<=90;i++)
 {
-    Game.data.isFullscreen=false;
+  dicta[i]=ASCII[i].toString();
+  antiDicta[ASCII[i].toString()]=i;
 }
-*/
-
-Game.saveUserData();
-
-Game.GAMEWIDTH=-1;
-Game.GAMEHEIGHT=-1;
-
-Game.windowResizeCalculate=()=>{
-  let gw = 1920*3;
-  let gh = 1080;
-  let ww = window.innerWidth;
-  let wh = window.innerHeight;
-  let scale = wh / gh; // scale by height
-  Game.GAMEWIDTH = gw/((ww/wh)/(1920/1080));
-  Game.GAMEHEIGHT = gh/((ww/wh)/(1920/1080));
-}
-
-Game.setProperCameraZoom=(scene)=>{
-  scene.game.currentWidth=window.innerWidth;
-  scene.game.currentHeight=window.innerHeight;
-
-  if(scene.scale.parentSize._width/scene.scale.parentSize._height>1920/1080)
-  {
-    scene.cameras.main.zoom=1;
-  }
-  else
-  {
-    scene.cameras.main.zoom=(scene.scale.parentSize._width/scene.scale.parentSize._height)/(1920/1080);
-  }
-}
-
-
-Game.removeItemOnce=(arr, value)=>{
-    var index = arr.indexOf(value);
-    if (index > -1) {
-      arr.splice(index, 1);
-    }
-    return arr;
-  }
-  
-Game.shuffle=(array)=>
+for(let i=91;i<=180;i++)
 {
-    let currentIndex = array.length,  randomIndex;
-
-    // While there remain elements to shuffle.
-    while (currentIndex != 0) {
-
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-        array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
+  dicta[i]=ASCII[91].toString()+ASCII[i-90].toString();
+  antiDicta[ASCII[91].toString()+ASCII[i-90].toString()]=i;
 }
-
-Game.getDistance=(x1,y1,x2,y2)=>
+for(let i=181;i<=270;i++)
 {
-  return Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+  dicta[i]=ASCII[92].toString()+ASCII[i-180].toString();
+  antiDicta[ASCII[92].toString()+ASCII[i-180].toString()]=i;
+}
+for(let i=271;i<=300;i++)
+{
+  dicta[i]=ASCII[93].toString()+ASCII[i-270].toString();
+  antiDicta[ASCII[93].toString()+ASCII[i-270].toString()]=i;
 }
 
-window.addEventListener('contextmenu', function (e) { 
-  // do something here... 
-  //e.preventDefault(); 
-}, false);
-
-Game.MUSIC=null;
-
-Game.transitionColor=0x092db0;
-Game.transitionColor=0x000000;
-Game.transitionTime=800;
+console.log(dicta)
+console.log(antiDicta)
+/**/
