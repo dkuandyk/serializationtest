@@ -186,33 +186,3 @@ TEST+="\n\n\n";
 
 console.log(TEST)
 
-/*
-let ASCII=" !'#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
-
-let dicta={};
-let antiDicta={};
-
-for(let i=1;i<=90;i++)
-{
-  dicta[i]=ASCII[i].toString();
-  antiDicta[ASCII[i].toString()]=i;
-}
-for(let i=91;i<=180;i++)
-{
-  dicta[i]=ASCII[91].toString()+ASCII[i-90].toString();
-  antiDicta[ASCII[91].toString()+ASCII[i-90].toString()]=i;
-}
-for(let i=181;i<=270;i++)
-{
-  dicta[i]=ASCII[92].toString()+ASCII[i-180].toString();
-  antiDicta[ASCII[92].toString()+ASCII[i-180].toString()]=i;
-}
-for(let i=271;i<=300;i++)
-{
-  dicta[i]=ASCII[93].toString()+ASCII[i-270].toString();
-  antiDicta[ASCII[93].toString()+ASCII[i-270].toString()]=i;
-}
-
-console.log(dicta)
-console.log(antiDicta)
-/**/
